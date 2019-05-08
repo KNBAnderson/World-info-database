@@ -165,30 +165,31 @@ namespace WorldDatabase.Models
       }
       return foundCity;
     }
-//This doesnt work
-    // public void EditCity(object fieldName, object fieldNewValue)
-    // {
-    //   MySqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //   var cmd = conn.CreateCommand() as MySqlCommand;
-    //   cmd.CommandText = @"UPDATE city SET @fieldName = @fieldNewValue WHERE id = @searchId;";
-    //   MySqlParameter searchId = new MySqlParameter();
-    //   searchId.ParameterName = "@searchId";
-    //   searchId.Value = Id;
-    //   cmd.Parameters.Add(searchId);
-    //   MySqlParameter fieldToChange = new MySqlParameter();
-    //   fieldToChange.ParameterName = "@fieldNewValue";
-    //   fieldToChange.Value = fieldNewValue;
-    //   cmd.Parameters.Add(fieldToChange);
-    //   cmd.ExecuteNonQuery();
-    //   fieldName = fieldNewValue;
-    //   // More logic will go here.
-    //
-    //   conn.Close();
-    //   if (conn != null)
-    //   {
-    //     conn.Dispose();
-    //   }
-    //}
+// This doesnt work
+    public void EditCity(string fieldName, object fieldNewValue)
+    {
+      fieldNewValue = (fieldNewValue is string) ? fieldNewValue : fieldNewValue.ToString();
+
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"UPDATE city SET " + fieldName + " = " + fieldNewValue + " WHERE id = @searchId;";
+
+      cmd.Parameters.AddWithValue("@searchId", Id);
+      //cmd.Parameters.AddWithValue("@fieldNewValue", fieldNewValue);
+      cmd.ExecuteNonQuery();
+      //   for (int i = 0; i < this.GetType().GetProperties().Length; i++)
+      //   {
+      //     Console.WriteLine(this.GetType().GetProperties().Length);
+      //     // if(fieldName == City[i])
+      //   }
+      // // this.fieldName = fieldNewValue;
+      // // More logic will go here.
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
   }
 }

@@ -106,19 +106,31 @@ namespace WorldDatabase.Tests
       Assert.AreEqual(testCity, foundCity);
     }
     //This doesnt work yet
-    // [TestMethod]
-    // public void Edit_UpdateCityPopulationInDatabase_int()
-    // {
-    //   int firstPopulation = 10000;
-    //   City lilTown = new City("Hanover", "HNR", firstPopulation);
-    //   lilTown.Save();
-    //   int secondPopulation = 190312442;
-    //
-    //   lilTown.EditCity("Population", secondPopulation);
-    //   int result = City.Find(lilTown.Id).Population;
-    //   Assert.AreEqual(secondPopulation, result);
-    // }
+    [TestMethod]
+    public void Edit_UpdateCityPopulationInDatabase_int()
+    {
+      int firstPopulation = 10000;
+      City lilTown = new City("Hanover", "HNR", firstPopulation);
+      lilTown.Save();
+      int secondPopulation = 190312442;
 
+      lilTown.EditCity("Population", secondPopulation);
+      int result = City.Find(lilTown.Id).Population;
+      Assert.AreEqual(secondPopulation, result);
+    }
+    // 
+    // [TestMethod]
+    // public void Edit_UpdateCityPopulationInDatabase_string()
+    // {
+    //   string firstName = "Justinville";
+    //   City lilBerg = new City(firstName, "HNR", 100);
+    //   lilBerg.Save();
+    //   string secondName = "Justinburg";
+    //
+    //   lilBerg.EditCity("Name", secondName);
+    //   string result = City.Find(lilBerg.Id).Name;
+    //   Assert.AreEqual(secondName, result);
+    // }
     // [TestMethod]
     // public void ItemConstructor_CreatesInstanceOfItem_Item()
     // {
